@@ -3,7 +3,14 @@ module.exports = function (kibana) {
 		uiExports: {
 			hacks: [
 				'plugins/kpd_custom_theme/hacks'
-			]
+			],
+			injectDefaultVars: function(server) {
+			  const config = server.config();
+			  return {
+			    CSS: config.get('css'),
+			    FAVICON: config.get('favicon')
+			  };
+			}
 		},
 		config: function (Joi) {
 		        return Joi.object({
